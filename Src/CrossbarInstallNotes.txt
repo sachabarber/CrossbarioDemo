@@ -1,0 +1,38 @@
+INSTALLATION
+
+1. Download python, install it to default not to "Program Files", make sure "Add to path" is YES
+2. using pip : pip install pypiwin32
+3. pip install crossbar
+4. Validate install command line :  which crossbar
+5. Validate install command line :  crossbar version
+
+CREATE AN APP
+
+C# : http://crossbar.io/docs/Getting-started-with-CSharp/ did not work for me at all, downloaded examples directly. Found hello/csharp
+     didnt work. So made sure I updated all Nuget packages to the latest versions available (especially WampSharp) 
+	 
+	 
+DEBUGGING
+http://stackoverflow.com/questions/28251494/how-to-log-debug-a-crossbar-guest-worker
+http://stackoverflow.com/questions/27476238/debugging-crossbar-io-app-in-intellij/27544912#27544912
+
+Use "which crossbar" to find crossbar installation path, for me this is
+
+c:\Users\sacha\AppData\Local\Programs\Python\Python36-32\Scripts\crossbar 
+
+
+Edit Dotnet project to start external program
+
+
+Start external program
+
+C:\Users\sacha\AppData\Local\Programs\Python\Python36-32\Scripts\crossbar.exe
+
+command line args
+
+start --cbdir C:\Users\sacha\Desktop\CrossbarIOExample\CrossBarDotNetExample\.crossbar
+
+
+	 
+
+

@@ -1,0 +1,172 @@
+﻿
+<head>
+</head>
+
+<div id="TOC"></div>
+
+<h1>Introduction</h1>
+<p>A while ago someone posted another SignalR article on 
+<a href="http://www.codeproject.com">www.codeproject.com</a>, and I stated hey 
+you should take a look at this stuff : <a href="http://crossbar.io/">crossbar.io</a>, 
+and not liking to me someone that is not willing to die by the sword (afting 
+living by it of course) I decided to put my money where my mouth was/is, and write a 
+small article on <a href="http://crossbar.io/">crossbar.io</a>.</p>
+<p>&nbsp;</p>
+<p>So what its <a href="http://crossbar.io/">crossbar.io</a>? Well quite simply 
+it is a message broker that has many language bindings, that should all be able 
+to communicate together seemlessly.&nbsp;</p>
+<p>Here is what the people being <a href="http://crossbar.io/">crossbar.io</a> 
+have to say about their own product</p>
+<p><em>Crossbar.io is an open source networking platform for distributed and 
+microservice applications. It implements the open Web Application Messaging 
+Protocol (WAMP), is feature rich, scalable, robust and secure. Let Crossbar.io 
+take care of the hard parts of messaging so you can focus on your app's 
+features.</em></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h1>So tell me more about Crossbar.IO</h1>
+<p><a href="http://crossbar.io/">crossbar.io</a> claim to have these language 
+bindings:</p>
+<ul>
+	<li>JavaScript in the browser *</li>
+	<li>JavaScript in Node *</li>
+	<li>Python</li>
+	<li>PHP</li>
+	<li>Java</li>
+	<li>C#</li>
+	<li>Erlang</li>
+</ul>
+<p>&nbsp;</p>
+<p>So on the surface of it, this looks like quite a cool library allowing many 
+different disparate applications talk to each other.</p>
+<p>It is worth pointing out that these language bindings without a * are written 
+by the community, they are NOT maintained by the <a href="http://crossbar.io/">
+crossbar.io</a> developers, as such you may find differences between what works 
+in the main actual <a href="http://crossbar.io/">crossbar.io</a> maintained 
+language binding.</p>
+<p>Unfornately this is life, its exactly the same when you use other messaging 
+frameworks with multi-language bindings like <a href="https://www.rabbitmq.com/">
+RabbitMQ</a> and <a href="https://kafka.apache.org/">Kafka</a> (which we will be 
+looking at more later).</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h1>Where is the code?</h1>
+<p>For the little demo app that this article uses all the demo code is at my 
+GitHub account : <a href="https://github.com/sachabarber/CrossbarioDemo">
+https://github.com/sachabarber/CrossbarioDemo</a></p>
+<p>&nbsp;</p>
+
+<h1>Installation</h1>
+<p>This section will guide you through the installation process</p>
+<p>&nbsp;</p>
+<h2>Installing Python</h2>
+<ol>
+	<li>Download <a href="https://www.python.org/downloads/release/python-360/">
+	python</a>, install it to default not to "Program Files", make sure "Add to 
+	path" is YES</li>
+	<li>Open a <strong>cmd </strong>line where you installed python</li>
+	<li>using <strong>pip</strong> from python command line: <strong><em>pip 
+	install pypiwin32</em></strong></li>
+	<li>using <strong>pip</strong> from python command line: <strong><em>pip 
+	install crossbar</em></strong></li>
+</ol>
+<h2><br>Verifying Crossbar.io installation</h2>
+<ol>
+	<li>Validate install command line : which crossbar</li>
+	<li>Validate install command line : crossbar version</li>
+</ol>
+<h2>&nbsp;</h2>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h1>The Demo</h1>
+<h2>Core Concepts</h2>
+<h3>crossbar node</h3>
+<h3>.crossbar folders</h3>
+<p>&nbsp;</p>
+<h2>The .NET code</h2>
+<h2>The JavaScript Code</h2>
+<h2>How do I debug and still run crossbar?</h2>
+<h2>&nbsp;</h2>
+<h1>Comparison with others</h1>
+<p>It seems only fair that I do a comparison of it next to a few other messaging 
+frameworks that I like/have used. Its worth noting that these all need something 
+extra installed before you even get into any comparison</p>
+<ul>
+	<li>Crossbar needs python</li>
+	<li>Rabbit need Erlang</li>
+	<li>Kafka needs a JDK</li>
+</ul>
+<p>&nbsp;</p>
+<table style="width: 100%; padding:2px" cellpadding="2px" cellspacing="2px" border="1" bordercolor="black">
+	<tr >
+		<td>&nbsp;</td>
+		<td><strong>Multi Language</strong></td>
+		<td><strong>Persisted messaged</strong></td>
+		<td><strong>Clustered</strong></td>
+		<td><strong>Configuration</strong></td>
+		<td><strong>Debugging Experience</strong></td>
+		<td><strong>Pub/Sub</strong></td>
+		<td><strong>RPC</strong></td>
+	</tr>
+	<tr>
+		<td><strong>Crossbar.io</strong></td>
+		<td>Yes</td>
+		<td bgcolor="orange">No <sup>(1)</sup></td>
+		<td bgcolor="orange">No</td>
+		<td bgcolor="orange">Via some weird .crossbar folder. May be possible to do same in code 
+		but probably a right nightmare</td>
+		<td bgcolor="orange">Bit naff to be honest. As crossbar wants to use the .crossbar folder config to start your "crossbar node". Which means 
+		it is running the app not your IDE. So you are forced to start 
+		crossbar.exe from your app, and pass it a config command line arg, and 
+		wait for it to be running.<br><br>Mmm</td>
+		<td bgcolor="green">Yes, with ease</td>
+		<td bgcolor="green">Yes, with ease</td>
+	</tr>
+	<tr>
+		<td><strong>RabbitMQ</strong></td>
+		<td bgcolor="green">Yes</td>
+		<td bgcolor="green">Yes</td>
+		<td bgcolor="green">Yes</td>
+		<td bgcolor="green">Via standard code/config</td>
+		<td bgcolor="green">Just run browser/IDE and put in breakpoints</td>
+		<td bgcolor="green">Yes, with ease (queues)</td>
+		<td bgcolor="green">Yes, with correlationId</td>
+	</tr>
+		<tr>
+		<td><strong>Kafka</strong></td>
+		<td bgcolor="green">Yes</td>
+		<td bgcolor="green">Yes</td>
+		<td bgcolor="green">Yes</td>
+		<td bgcolor="green">Via standard code/config</td>
+		<td bgcolor="green">Just run browser/IDE and put in breakpoints</td>
+		<td bgcolor="green">Yes, with ease (topics)</td>
+		<td bgcolor="green">Yes, with correlationId + extra topic, not as easy as others</td>
+	</tr>
+</table>
+<p>&nbsp;</p>
+<p><sup><sup></sup>1</sup> One way to deal with this is slap a database in the 
+way so all producers write to the database first, then you just use event 
+sourcing to supply the <a href="http://crossbar.io/">
+crossbar.io</a> node with events, which it will 
+broadcast out. </p>
+<p>So as you can see there are far better solutions out there, but it really 
+does depend on what your needs are.</p>
+<p>&nbsp;</p>
+
+<h1>Conclusion</h1>
+<p>This is a tricky part to write, as on one hand I like the fact that this is 
+fairly easy to use, but on the other hand there are just too many factors that I 
+don't like to make this my defacto goto messaging solution. </p>
+<p>I like how different things can talk to each other fairly easily (all be it 
+each language bindding offers a VERY different API). I don't like how debugging 
+is hard, and I have to use this .crossbar folder to configure things.</p>
+<p>I am also not a fan of the messaging not being durable. Sure you can get 
+round it as I've stated but there are better solutions out there.</p>
+<p>So for me its ok if all you really want is fire and forget, non persisted 
+messaging, for anything else I would use <a href="https://www.rabbitmq.com/">
+RabbitMQ</a> or <a href="https://kafka.apache.org/">Kafka</a> </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

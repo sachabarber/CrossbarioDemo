@@ -1,0 +1,21 @@
+{
+    "pid": 12364, 
+    "argv": [
+        "C:\\Users\\sacha\\AppData\\Local\\Programs\\Python\\Python36-32\\Scripts\\crossbar", 
+        "start", 
+        "--cbdir", 
+        "C:\\Users\\sacha\\Desktop\\CrossbarIOExample\\CrossBarDotNetExample\\.crossbar"
+    ], 
+    "options": {
+        "reactor": null, 
+        "command": "start", 
+        "cbdir": "C:\\Users\\sacha\\Desktop\\CrossbarIOExample\\CrossBarDotNetExample\\.crossbar", 
+        "config": "config.json", 
+        "personality": "community", 
+        "logdir": null, 
+        "logtofile": false, 
+        "loglevel": "info", 
+        "colour": false, 
+        "logformat": "standard"
+    }
+}
