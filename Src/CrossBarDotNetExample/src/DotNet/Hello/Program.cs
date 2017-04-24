@@ -50,7 +50,12 @@ namespace Hello
             {
                 Process process = new Process();
                 process.StartInfo.FileName = @"c:\Users\sacha\AppData\Local\Programs\Python\Python36-32\Scripts\crossbar.exe";
-                process.StartInfo.Arguments = @"start --cbdir C:\Users\sacha\Desktop\CrossbarIOExample\CrossBarDotNetExample\.crossbar";
+
+                //TODO : Change this to your location
+                //TODO : Change this to your location
+                //TODO : Change this to your location
+                //TODO : Change this to your location
+                process.StartInfo.Arguments = @"start --cbdir C:\Users\sacha\Desktop\CrossbarioDemo\Src\CrossBarDotNetExample\.crossbar";
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                 process.Start();
                 // Waits here for the process to exit, but since this is 
@@ -60,7 +65,7 @@ namespace Hello
             }, TaskCreationOptions.LongRunning);
 
             //give CrossBar.io process time to start
-            System.Threading.Thread.Sleep(1000 * 20);
+            System.Threading.Thread.Sleep(1000 * 10);
 #endif
 
 

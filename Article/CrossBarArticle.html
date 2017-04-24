@@ -1,10 +1,56 @@
-﻿
+
 <head>
 </head>
 
-<div id="TOC"></div>
+<ul>
+<li><a href="#Introduction">Introduction</a></li>
 
-<h1>Introduction</h1>
+<li><a href="#So-tell-me-more-about-Crossbar.IO">So tell me more about Crossbar.IO</a></li>
+
+<li><a href="#Where-is-the-code?">Where is the code?</a></li>
+
+<li><a href="#Installation">Installation</a>
+<ul>
+<li><a href="#Installing-Python">Installing Python</a></li>
+
+<li><a href="#<br>Verifying-Crossbar.io-installation">Verifying Crossbar.io installation</a></li>
+
+</ul>
+
+<li><a href="#The-Demo">The Demo</a>
+<ul>
+<li><a href="#Core-Concepts">Core Concepts</a>
+<ul>
+<li><a href="#crossbar-node">crossbar node</a></li>
+
+<li><a href="#.crossbar-folders">.crossbar folders</a></li>
+
+</ul>
+
+<li><a href="#RPC">RPC</a></li>
+
+<li><a href="#Pub/Sub">Pub/Sub</a></li>
+
+<li><a href="#The-Demo-Code">The Demo Code</a></li>
+
+<li><a href="#The-.NET-code">The .NET code</a></li>
+
+<li><a href="#The-JavaScript-Code">The JavaScript Code</a></li>
+
+<li><a href="#Runtime-Screenshots">Runtime Screenshots</a></li>
+
+<li><a href="#How-do-I-debug-and-still-run-crossbar?">How do I debug and still run crossbar?</a></li>
+
+</ul>
+
+<li><a href="#Comparison-with-others">Comparison with others</a></li>
+
+<li><a href="#Conclusion">Conclusion</a></li>
+
+</ul>
+
+
+<h1><a name="Introduction" id="Introduction">Introduction</a></h1>
 <p>A while ago someone posted another SignalR article on 
 <a href="http://www.codeproject.com">www.codeproject.com</a>, and I stated hey 
 you should take a look at this stuff : <a href="http://crossbar.io/">crossbar.io</a>, 
@@ -25,7 +71,7 @@ features.</em></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<h1>So tell me more about Crossbar.IO</h1>
+<h1><a name="So-tell-me-more-about-Crossbar.IO" id="So-tell-me-more-about-Crossbar.IO">So tell me more about Crossbar.IO</a></h1>
 <p><a href="http://crossbar.io/">crossbar.io</a> claim to have these language 
 bindings:</p>
 <ul>
@@ -52,16 +98,16 @@ looking at more later).</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<h1>Where is the code?</h1>
+<h1><a name="Where-is-the-code?" id="Where-is-the-code?">Where is the code?</a></h1>
 <p>For the little demo app that this article uses all the demo code is at my 
 GitHub account : <a href="https://github.com/sachabarber/CrossbarioDemo">
 https://github.com/sachabarber/CrossbarioDemo</a></p>
 <p>&nbsp;</p>
 
-<h1>Installation</h1>
+<h1><a name="Installation" id="Installation">Installation</a></h1>
 <p>This section will guide you through the installation process</p>
 <p>&nbsp;</p>
-<h2>Installing Python</h2>
+<h2><a name="Installing-Python" id="Installing-Python">Installing Python</a></h2>
 <ol>
 	<li>Download <a href="https://www.python.org/downloads/release/python-360/">
 	python</a>, install it to default not to "Program Files", make sure "Add to 
@@ -72,25 +118,515 @@ https://github.com/sachabarber/CrossbarioDemo</a></p>
 	<li>using <strong>pip</strong> from python command line: <strong><em>pip 
 	install crossbar</em></strong></li>
 </ol>
-<h2><br>Verifying Crossbar.io installation</h2>
-<ol>
-	<li>Validate install command line : which crossbar</li>
-	<li>Validate install command line : crossbar version</li>
-</ol>
-<h2>&nbsp;</h2>
+<h2><a name="<br>Verifying-Crossbar.io-installation" id="<br>Verifying-Crossbar.io-installation"><br>Verifying Crossbar.io installation</a></h2>
+<p>1. Validate install command line : which crossbar&nbsp;</p>
+<p><a href="Which1_Big.png" target="_blank"><img alt="" height="36" src="Which1_Small.png" width="600"></a></p>
+<p><i>CLICK FOR LARGER IMAGE</i></p>
+<p>&nbsp;</p>
+<p>2. Validate install command line : crossbar version</p>
+<p><a href="Which2_Big.png" target="_blank"><img alt="" height="175" src="Which2_Small.png" width="600"></a></p>
+<p><i>CLICK FOR LARGER IMAGE</i></p>
+<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<h1>The Demo</h1>
-<h2>Core Concepts</h2>
-<h3>crossbar node</h3>
-<h3>.crossbar folders</h3>
+<h1><a name="The-Demo" id="The-Demo">The Demo</a></h1>
+<p>This section will outline some core <a href="http://crossbar.io/">crossbar.io</a> 
+idea before we dive into the demo code</p>
+<h2><a name="Core-Concepts" id="Core-Concepts">Core Concepts</a></h2>
+<h3><a name="crossbar-node" id="crossbar-node">crossbar node</a></h3>
+<p><a href="http://crossbar.io/">crossbar.io</a> has this concept of&nbsp; 
+"node". A "node" is basically a running instance of the crossbar.exe process 
+which is running an active configuration. Typically this would be once per 
+machine/VM.</p>
+<h3><a name=".crossbar-folders" id=".crossbar-folders">.crossbar folders</a></h3>
+<p>In order to configure the running crossbar node, there is a special folder 
+where it will look, which is called ".crossbar". In this folder, there are a 
+number of files, the MOST important of which is "<code>config.json</code><code></code>", 
+which is what is used to actual configure the crossbar.exe process when it 
+starts. This folder is magical/special and will be examined when you use the
+<code>crossbar start</code> command line (which we don't actually want to do, 
+but more on this in just a moment).</p>
+<p>When we issue a <code>crossbar start</code> command line, crossbar.exe will 
+pick up the config file it finds at within the folder specified by the .crossbar 
+name.</p>
+<p>So what's it one of these "<code>config.json</code>" files.</p>
+<p>Here is one that comes with the&nbsp; .NET demos :
+<a href="https://github.com/crossbario/crossbar-examples">
+https://github.com/crossbario/crossbar-examples</a>, namely the
+<a href="https://github.com/crossbario/crossbar-examples/tree/master/hello/csharp">
+https://github.com/crossbario/crossbar-examples/tree/master/hello/csharp</a> 
+demo (the <a href="http://crossbar.io/">crossbar.io</a>&nbsp; web site says you 
+should be able to use the command line to scaffold a new project for your 
+language of choice, but you xan't they found it too much work to manatin the 
+templates so you need to grab them from the examples folder).</p>
+<pre lang="js">
+{
+    "version": 2,
+    "controller": {},
+    "workers": [
+        {
+            "type": "router",
+            "options": {
+                "pythonpath": [
+                    ".."
+                ]
+            },
+            "realms": [
+                {
+                    "name": "realm1",
+                    "roles": [
+                        {
+                            "name": "anonymous",
+                            "permissions": [
+                                {
+                                    "uri": "",
+                                    "match": "prefix",
+                                    "allow": {
+                                        "call": true,
+                                        "register": true,
+                                        "publish": true,
+                                        "subscribe": true
+                                    },
+                                    "disclose": {
+                                        "caller": false,
+                                        "publisher": false
+                                    },
+                                    "cache": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "transports": [
+                {
+                    "type": "web",
+                    "endpoint": {
+                        "type": "tcp",
+                        "port": 8080
+                    },
+                    "paths": {
+                        "/": {
+                            "type": "static",
+                            "directory": "../src/Web"
+                        },
+                        "ws": {
+                            "type": "websocket"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "guest",
+            "executable": "Hello.exe",
+            "arguments": [
+                "ws://127.0.0.1:8080/ws",
+                "realm1"
+            ],
+            "options": {
+                "workdir": "../src/DotNet/Hello/bin/Debug/"
+            }
+        }
+    ]
+}
+</pre>
 <p>&nbsp;</p>
-<h2>The .NET code</h2>
-<h2>The JavaScript Code</h2>
-<h2>How do I debug and still run crossbar?</h2>
-<h2>&nbsp;</h2>
-<h1>Comparison with others</h1>
+<p>There are actual 2 workers in this one config file</p>
+<ul>
+	<li>A web site</li>
+	<li>A .NET application (Hello.exe)</li>
+</ul>
+<p>&nbsp;</p>
+<p>So lets think about that for a minute, we have this config file, and we are 
+supposed to run crossbar.exe with this configuration file, and it starts 
+Hello.exe and some web site. mmmm, How do I debug Hello.exe if Crossbar.exe is 
+running it.</p>
+<p>Seems to me that this is the opposite of what we want, how do we debug. There 
+are a few posts on this</p>
+<ul>
+	<li>
+	<a href="http://stackoverflow.com/questions/28251494/how-to-log-debug-a-crossbar-guest-worker">
+	http://stackoverflow.com/questions/28251494/how-to-log-debug-a-crossbar-guest-worker</a></li>
+	<li>
+	<a href="http://stackoverflow.com/questions/27476238/debugging-crossbar-io-app-in-intellij/27544912#27544912">
+	http://stackoverflow.com/questions/27476238/debugging-crossbar-io-app-in-intellij/27544912#27544912</a>&nbsp;</li>
+</ul>
+<p>I decided to take an alternative route to this, I thought I don't mind using 
+the web dev tools (F12 in Chrome) to debug JavaScripts, but for .NET I want to 
+use Visual Studio, so I get my .NET code to start Crossbar.io as an extra 
+process, where I config the .NET worker in code, and pass the new Crossbar.exe 
+process a modified version of the file above, that has the .NET Hello.exe config 
+taken out of it.</p>
+<p>I have to say if I had of been using <a href="https://www.rabbitmq.com/">
+RabbitMQ</a> OR <a href="https://kafka.apache.org/">Kafka</a> this would have 
+been childs play. I prefer embedded APIs rather than having to submit my code to 
+something else to run. Sure you MUST be able to configure stuff yourself, but 
+why not start out that way.</p>
+<p>&nbsp;</p>
+<h2><a name="RPC" id="RPC">RPC</a></h2>
+<p><a href="http://crossbar.io/">crossbar.io</a> allows workers to make Remote 
+Procedure Calls to other workers in different languages</p>
+<p>&nbsp;</p>
+<h2><a name="Pub/Sub" id="Pub/Sub">Pub/Sub</a></h2>
+<p><a href="http://crossbar.io/">crossbar.io</a> allows workers to publish and 
+receive to/from other workers in different languages</p>
+<p>&nbsp;</p>
+<h2><a name="The-Demo-Code" id="The-Demo-Code">The Demo Code</a></h2>
+<p>The demo code will show a single .NET worker and single JavaScript worker 
+that will pub/sub and RPC to each other</p>
+<p>&nbsp;</p>
+<h2><a name="The-.NET-code" id="The-.NET-code">The .NET code</a></h2>
+<p>Here is the entire .NET code for a publisher/subscriber, and RPC callable 
+.NET program</p>
+<pre lang="cs">
+using System;
+using System.Reactive.Subjects;
+using System.Threading.Tasks;
+using WampSharp.Core.Listener;
+using WampSharp.V2;
+using WampSharp.V2.Client;
+using WampSharp.V2.Core.Contracts;
+using WampSharp.V2.Realm;
+using WampSharp.V2.Rpc;
+using System.Diagnostics;
+
+namespace Hello
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+
+#if DEBUG
+            //use this for debugging
+            Task.Factory.StartNew(() =&gt;
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = @"c:\Users\sacha\AppData\Local\Programs\Python\Python36-32\Scripts\crossbar.exe";
+                process.StartInfo.Arguments = @"start --cbdir C:\Users\sacha\Desktop\CrossbarIOExample\CrossBarDotNetExample\.crossbar";
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                process.Start();
+                // Waits here for the process to exit, but since this is 
+                // dedicated thread main thread is not blocked
+                process.WaitForExit();
+
+            }, TaskCreationOptions.LongRunning);
+
+            //give CrossBar.io process time to start
+            System.Threading.Thread.Sleep(1000 * 20);
+#endif
+
+
+            Console.WriteLine("WampSharp Hello demo starting ...");
+
+            string wsuri = "ws://127.0.0.1:8080/ws";
+            string realm = "realm1";
+            if (args.Length &gt; 0) {
+               wsuri = args[0];
+               if (args.Length &gt; 1) {
+                  realm = args[1];
+               }
+            }
+            
+            Task runTask = Run(wsuri, realm);
+
+            Console.ReadLine();
+        }
+
+        private async static Task Run(string wsuri, string realm)
+        {
+            Console.WriteLine("Connecting to {0}, realm {1}", wsuri, realm);
+
+            DefaultWampChannelFactory factory = new DefaultWampChannelFactory();
+
+            IWampChannel channel =
+                factory.CreateJsonChannel(wsuri, realm);
+
+            IWampClientConnectionMonitor monitor = channel.RealmProxy.Monitor;
+            
+            monitor.ConnectionBroken += OnClose;
+            monitor.ConnectionError += OnError;
+
+            await channel.Open().ConfigureAwait(false);
+
+            IWampRealmServiceProvider services = channel.RealmProxy.Services;
+
+            // SUBSCRIBE to a topic and receive events
+            ISubject&lt;string&gt; helloSubject = 
+                services.GetSubject&lt;string&gt;("com.example.onhello");
+
+            IDisposable subscription =
+                helloSubject.Subscribe
+                    (x =&gt; Console.WriteLine("event for 'onhello' received: {0}", x));
+
+            Console.WriteLine("subscribed to topic 'onhello'");
+
+
+            // REGISTER a procedure for remote calling
+            Add2Service callee = new Add2Service();
+
+            await services.RegisterCallee(callee)
+                .ConfigureAwait(false);
+            
+            Console.WriteLine("procedure add2() registered");
+
+
+            // PUBLISH and CALL every second... forever
+            ISubject&lt;int&gt; onCounterSubject =
+                services.GetSubject&lt;int&gt;("com.example.oncounter");
+
+            ISubject&lt;int&gt; onDotNetCounterSubject =
+              services.GetSubject&lt;int&gt;("com.example.ondotnetcounter");
+
+
+            IMul2Service proxy =
+                services.GetCalleeProxy&lt;IMul2Service&gt;();
+
+            int counter = 0;
+
+            while (true)
+            {
+                // PUBLISH an event
+                onCounterSubject.OnNext(counter);
+                Console.WriteLine("published to 'oncounter' with counter {0}", counter);
+
+                onDotNetCounterSubject.OnNext(counter);
+                Console.WriteLine("published to 'ondotnetcounter' with counter {0}", counter);
+                counter++;
+
+
+                // CALL a remote procedure
+                try
+                {
+                    int result = await proxy.Multiply(counter, 3)
+                        .ConfigureAwait(false);
+
+                    Console.WriteLine("mul2() called with result: {0}", result);
+                }
+                catch (WampException ex)
+                {
+                    if (ex.ErrorUri != "wamp.error.no_such_procedure")
+                    {
+                        Console.WriteLine("call of mul2() failed: " + ex);
+                    }
+                }
+
+
+                await Task.Delay(TimeSpan.FromSeconds(1))
+                    .ConfigureAwait(false);
+            }
+        }
+
+        #region Callee
+
+        public interface IAdd2Service
+        {
+            [WampProcedure("com.example.add2")]
+            int Add(int x, int y);
+        }
+
+        public class Add2Service : IAdd2Service
+        {
+            public int Add(int x, int y)
+            {
+                Console.WriteLine("add2() called with {0} and {1}", x, y);
+                return x + y;
+            }
+        }
+
+        #endregion
+
+        #region Caller
+
+        public interface IMul2Service
+        {
+            [WampProcedure("com.example.mul2")]
+            Task&lt;int&gt; Multiply(int x, int y);             
+        }
+
+        #endregion
+
+        private static void OnClose(object sender, WampSessionCloseEventArgs e)
+        {
+            Console.WriteLine("connection closed. reason: " + e.Reason);
+        }
+
+        private static void OnError(object sender, WampConnectionErrorEventArgs e)
+        {
+            Console.WriteLine("connection error. error: " + e.Exception);
+        }
+    }
+}
+</pre>
+<p>This uses the ONLY .NET binding <code>WampSharp</code> Nuget package. This is 
+developed by a community member, so updates may be patchy. Here be dragons (well 
+possibly anyway)</p>
+<h2><a name="&nbsp;" id="&nbsp;">&nbsp;</a></h2>
+<h2><a name="The-JavaScript-Code" id="The-JavaScript-Code">The JavaScript Code</a></h2>
+<p>Here is the entire JavaScript code for a publisher/subscriber, and RPC callable 
+JavaScript program</p>
+<pre lang="js">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h1&gt;Hello WAMP&lt;/h1&gt;
+      &lt;p&gt;Open JavaScript console to watch output.&lt;/p&gt;
+      &lt;script&gt;AUTOBAHN_DEBUG = false;&lt;/script&gt;
+       &lt;script src="js/autobahn.min.js"&gt;&lt;/script&gt;
+
+      &lt;script&gt;
+         // the URL of the WAMP Router (Crossbar.io)
+         //
+         var wsuri;
+         if (document.location.origin == "file://") {
+            wsuri = "ws://127.0.0.1:8080/ws";
+
+         } else {
+            wsuri = (document.location.protocol === "http:" ? "ws:" : "wss:") + "//" +
+                        document.location.host + "/ws";
+         }
+
+
+         // the WAMP connection to the Router
+         //
+         var connection = new autobahn.Connection({
+            url: wsuri,
+            realm: "realm1"
+         });
+
+
+         // timers
+         //
+         var t1, t2;
+
+
+         // fired when connection is established and session attached
+         //
+         connection.onopen = function (session, details) {
+
+            console.log("Connected");
+
+            // SUBSCRIBE to a topic and receive events
+            //
+            function on_counter (args) {
+               var counter = args[0];
+               console.log("on_counter() event received with counter " + counter);
+            }
+            session.subscribe('com.example.oncounter', on_counter).then(
+               function (sub) {
+                  console.log('subscribed to topic');
+               },
+               function (err) {
+                  console.log('failed to subscribe to topic', err);
+               }
+            );
+			
+			
+	<span lang="en-gb">    </span>//SUBSCRIBE to a topic and receive events
+            
+            function on_dotnetcounter (args) {
+               var counter = args[0];
+               console.log("DOTNET : on_dotnetcounter() event received with counter " + counter);
+            }
+            session.subscribe('com.example.ondotnetcounter', on_dotnetcounter).then(
+               function (sub) {
+                  console.log('subscribed to topic');
+               },
+               function (err) {
+                  console.log('failed to subscribe to topic', err);
+               }
+            );
+
+
+            // PUBLISH an event every second
+            //
+            t1 = setInterval(function () {
+
+               session.publish('com.example.onhello', ['Hello from JavaScript (browser)']);
+               console.log("published to topic 'com.example.onhello'");
+            }, 1000);
+
+
+            // REGISTER a procedure for remote calling
+            //
+            function mul2 (args) {
+               var x = args[0];
+               var y = args[1];
+               console.log("mul2() called with " + x + " and " + y);
+               return x * y;
+            }
+            session.register('com.example.mul2', mul2).then(
+               function (reg) {
+                  console.log('procedure registered');
+               },
+               function (err) {
+                  console.log('failed to register procedure', err);
+               }
+            );
+
+
+            // CALL a remote procedure every second
+            //
+            var x = 0;
+
+            t2 = setInterval(function () {
+
+               session.call('com.example.add2', [x, 18]).then(
+                  function (res) {
+                     console.log("add2() result:", res);
+                  },
+                  function (err) {
+                     console.log("add2() error:", err);
+                  }
+               );
+
+               x += 3;
+            }, 1000);
+         };
+
+
+         // fired when connection was lost (or could not be established)
+         //
+         connection.onclose = function (reason, details) {
+            console.log("Connection lost: " + reason);
+            if (t1) {
+               clearInterval(t1);
+               t1 = null;
+            }
+            if (t2) {
+               clearInterval(t2);
+               t2 = null;
+            }
+         }
+
+
+         // now actually open the connection
+         //
+         connection.open();
+
+      &lt;/script&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>As JavaScript IS AN OFFICIALLY supported binding, this should be kelpt up to date by the <a href="http://crossbar.io/">crossbar.io</a> 
+a folks.</p>
+<p>&nbsp;</p>
+<h2><a name="Runtime-Screenshots" id="Runtime-Screenshots">Runtime Screenshots</a></h2>
+<p>And this is what we see when we run the solution in Visual Studio</p>
+<p><a href="Demo_Big.png" target="_blank"><img alt="" height="343" src="Demo_Small.png" width="600"></a></p>
+<p><i>CLICK FOR LARGER IMAGE</i></p>
+<p>&nbsp;</p>
+<h2><a name="How-do-I-debug-and-still-run-crossbar?" id="How-do-I-debug-and-still-run-crossbar?">How do I debug and still run crossbar?</a></h2>
+<ul>
+	<li>For the .NET code you can just use my trick where I start an extra 
+	crossbar.exe process and tell it what modified config file to use</li>
+	<li>For the web app just use the dev tools of your browser.</li>
+</ul>
+<p>&nbsp;</p>
+<h2><a name="&nbsp;" id="&nbsp;">&nbsp;</a></h2>
+<h1><a name="Comparison-with-others" id="Comparison-with-others">Comparison with others</a></h1>
 <p>It seems only fair that I do a comparison of it next to a few other messaging 
 frameworks that I like/have used. Its worth noting that these all need something 
 extra installed before you even get into any comparison</p>
@@ -156,7 +692,7 @@ broadcast out. </p>
 does depend on what your needs are.</p>
 <p>&nbsp;</p>
 
-<h1>Conclusion</h1>
+<h1><a name="Conclusion" id="Conclusion">Conclusion</a></h1>
 <p>This is a tricky part to write, as on one hand I like the fact that this is 
 fairly easy to use, but on the other hand there are just too many factors that I 
 don't like to make this my defacto goto messaging solution. </p>
